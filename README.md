@@ -6,7 +6,7 @@ cd tpm2-ssh
 ```
 Build and run the containers
 ```
-docker build -t --build-arg SOPIN=mysopin --build-arg USERPIN=myuserpin tpm-build .
+docker build -t tpm-build --build-arg SOPIN=mysopin --build-arg USERPIN=myuserpin .
 docker run -d -it --rm --name tpmssh -v /dev/tpm0:/dev/tpm0 -v /dev/tpmrm0:/dev/tpmrm0 --privileged build-tpm
 ```
 Copy the key to cameras
