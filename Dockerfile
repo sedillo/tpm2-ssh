@@ -40,6 +40,6 @@ ARG SOPIN=mysopin
 WORKDIR /tpm2
 RUN touch init.sh
 RUN chmod +x ./init.sh
-RUN echo "#!/bin/bash\nset -x\ntpm2_ptool init\ntpm2_ptool addtoken --pid=1 --label=label --sopin=${SOPIN} --userpin=${USERPIN}\ntpm2_ptool addkey --algorithm=rsa2048 --label=label --userpin=${USERPIN}\nssh-keygen -D /usr/local/lib/libtpm2_pkcs11.so | tee my.pub\n" > init.sh
+RUN echo "#!/bin/bash\nset -x\ncd voldir\ntpm2_ptool init\ntpm2_ptool addtoken --pid=1 --label=label --sopin=${SOPIN} --userpin=${USERPIN}\ntpm2_ptool addkey --algorithm=rsa2048 --label=label --userpin=${USERPIN}\nssh-keygen -D /usr/local/lib/libtpm2_pkcs11.so | tee my.pub\n" > init.sh
 
-ENTRYPOINT ["/bin/sh", "-c","/tpm2/init.sh; tail -f /dev/null"]
+ENTRYPOINT ["/bin/sh", "-c","tail -f /dev/null"]

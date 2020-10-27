@@ -6,8 +6,9 @@ cd tpm2-ssh
 ```
 Build and run the containers
 ```
+mkdir -p voldir
 docker build -t tpm-build --build-arg SOPIN=mysopin --build-arg USERPIN=myuserpin .
-docker run -d -it --rm --name tpmssh -v /dev/tpm0:/dev/tpm0 -v /dev/tpmrm0:/dev/tpmrm0 --privileged build-tpm
+docker run -d -it --rm --name tpmssh -v $(pwd)/voldir:/tpm2/voldir -v /dev/tpm0:/dev/tpm0 -v /dev/tpmrm0:/dev/tpmrm0 --privileged build-tpm
 ```
 Copy the key to cameras
 ```
